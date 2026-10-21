@@ -21,35 +21,35 @@ st.markdown("""
 # 3. İŞ İLANLARI VERİTABANIMIZ (DOĞRUDAN NOKTA ATIŞI İLAN DETAY LİNKLERİ)
 IS_BANKASI = [
     {
-        "unvan": "Genç Yazılımcı (Python)", "sehir": "Istanbul",
+        "unvan": "Genç Yazılımcı (Python)", "sehir": "İstanbul",
         "yetenekler": ["python", "kodlama", "yazilim"], "firma": "Vairosoft Bilgi Teknolojileri",
         "tuyp": "🎯 Şirket Kültürü: GitHub linkine inanılmaz önem veriyorlar! Projelerini eklemeyi unutma.",
         "link": "https://kariyer.net" 
     },
     {
-        "unvan": "Python Backend Developer", "sehir": "Istanbul",
+        "unvan": "Python Backend Developer", "sehir": "İstanbul",
         "yetenekler": ["seo", "reklam", "analiz", "pazarlama", "python"], "firma": "Arman Yazılım",
         "tuyp": "🎯 Şirket Kültürü: Mülakatta geçmişte yazdığın backend algoritmalarından bahset.",
         "link": "https://kariyer.net" 
     },
     {
-        "unvan": "Sosyal Medya Stajyeri", "sehir": "Izmir",
+        "unvan": "Sosyal Medya Stajyeri", "sehir": "İzmir",
         "yetenekler": ["tasarim", "instagram", "video", "pazarlama"], "firma": "Yaratıcı Medya Ajansı",
         "tuyp": "🎯 Şirket Kültürü: Instagram'da yaptığın eski tasarımları veya videoları mülakatta mutlaka göster.",
         "link": "https://kariyer.net"
     }
 ]
 
-# TÜRKİYE'NİN 81 İLİ (ALFABETİK LİSTE)
+# TÜRKİYE'NİN 81 İLİ (TAMAMEN TÜRKÇE VE ALFABETİK LİSTE)
 SEHIRLER_81 = [
-    "Adana", "Adiyaman", "Afyonkarahisar", "Agri", "Aksaray", "Amasya", "Ankara", "Antalya", "Ardahan", "Artvin", 
-    "Aydin", "Balikesir", "Bartin", "Batman", "Bayburt", "Bilecik", "Bingol", "Bitlis", "Bolu", "Burdur", 
-    "Bursa", "Canakkale", "Cankiri", "Corum", "Denizli", "Diyarbakir", "Duzce", "Edirne", "Elazig", "Erzincan", 
-    "Erzurum", "Eskisehir", "Gaziantep", "Giresun", "Gumushane", "Hakkari", "Hatay", "Igdir", "Isparta", "Istanbul", 
-    "Izmir", "Kahramanmaras", "Karabuk", "Karaman", "Kars", "Kastamonu", "Kayseri", "Kilis", "Kirikkale", "Kirklareli", 
-    "Kirsehir", "Kocaeli", "Konya", "Kutahya", "Malatya", "Manisa", "Mardin", "Mersin", "Mugla", "Mus", 
-    "Nevsehir", "Nigde", "Ordu", "Osmaniye", "Rize", "Sakarya", "Samsun", "Sanliurfa", "Siirt", "Sinop", 
-    "Sivas", "Sirnak", "Tekirdag", "Tokat", "Trabzon", "Tunceli", "Usak", "Van", "Yalova", "Yozgat", "Zonguldak"
+    "Adana", "Adıyaman", "Afyonkarahisar", "Ağrı", "Aksaray", "Amasya", "Ankara", "Antalya", "Ardahan", "Artvin", 
+    "Aydın", "Balıkesir", "Bartın", "Batman", "Bayburt", "Bilecik", "Bingöl", "Bitlis", "Bolu", "Burdur", 
+    "Bursa", "Çanakkale", "Çankırı", "Çorum", "Denizli", "Diyarbakır", "Düzce", "Edirne", "Elazığ", "Erzincan", 
+    "Erzurum", "Eskişehir", "Gaziantep", "Giresun", "Gümüşhane", "Hakkari", "Hatay", "Iğdır", "Isparta", "İstanbul", 
+    "İzmir", "Kahramanmaraş", "Karabük", "Karaman", "Kars", "Kastamonu", "Kayseri", "Kilis", "Kırıkkale", "Kırklareli", 
+    "Kırşehir", "Kocaeli", "Konya", "Kütahya", "Malatya", "Manisa", "Mardin", "Mersin", "Muğla", "Muş", 
+    "Nevşehir", "Niğde", "Ordu", "Osmaniye", "Rize", "Sakarya", "Samsun", "Şanlıurfa", "Siirt", "Sinop", 
+    "Sivas", "Şırnak", "Tekirdağ", "Tokat", "Trabzon", "Tunceli", "Uşak", "Van", "Yalova", "Yozgat", "Zonguldak"
 ]
 
 # 4. YARDIMCI FONKSİYONLAR
@@ -64,7 +64,7 @@ def pdf_metnini_oku(yuklenen_dosya):
         if yazi: tum_yazilar += yazi + "\n"
     return tum_yazilar
 
-# 5. SOL MENÜ (SIDEBAR) TASARIMI - 81 İL ENTEGRE EDİLDİ
+# 5. SOL MENÜ (SIDEBAR) TASARIMI
 st.sidebar.markdown("<h1 style='text-align: center;'>📑</h1>", unsafe_allow_html=True)
 st.sidebar.header("📍 Arama Ayarları")
 sehir_secimi = st.sidebar.selectbox("Çalışmak İstediğiniz Şehir:", SEHIRLER_81)
@@ -99,11 +99,10 @@ if yuklenen_dosya is not None:
                     with st.expander(f"💼 {ilan['unvan']} — {ilan['firma']}", expanded=True):
                         col1, col2 = st.columns(2)
                         with col1:
-                            st.write(f"**📍 Konum:** {ilan['sehir'].title()}")
+                            st.write(f"**📍 Konum:** {ilan['sehir']}")
                             st.write(f"**✅ Eşleşen Yetenekleriniz:** {', '.join(eslesenler).upper()}")
                             st.markdown("<span style='background-color:#D1FAE5; color:#065F46; padding:4px 8px; border-radius:12px; font-size:12px; font-weight:bold;'>✨ Genç Dostu Firma</span>", unsafe_allow_html=True)
                         with col2:
-                            # TIKLANDIĞINDA DOĞRUDAN ILANIN DETAYINA GÖTÜREN KESİN LİNK
                             link_kodu = f"""
                                 <a href="{ilan['link']}" target="_blank" style="text-decoration: none;">
                                     <div style="background-color: #1E3A8A; color: white; padding: 10px 12px; text-align: center; border-radius: 6px; font-weight: bold; font-size: 14px; margin-top: 15px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1);">
