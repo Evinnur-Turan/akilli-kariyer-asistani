@@ -18,25 +18,25 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
-# 3. İŞ İLANLARI VERİTABANIMIZ (DOĞRUDAN NOKTA ATIŞI İLAN DETAY LİNKLERİ)
+# 3. İŞ İLANLARI VERİTABANIMIZ (ASLA KAPANMAYACAK CANLI LİNKLER)
 IS_BANKASI = [
     {
         "unvan": "Genç Yazılımcı (Python)", "sehir": "İstanbul",
         "yetenekler": ["python", "kodlama", "yazilim"], "firma": "Vairosoft Bilgi Teknolojileri",
         "tuyp": "🎯 Şirket Kültürü: GitHub linkine inanılmaz önem veriyorlar! Projelerini eklemeyi unutma.",
-        "link": "https://kariyer.net" 
+        "link": "https://www.kariyer.net/is-ilanlari/istanbul-python" 
     },
     {
         "unvan": "Python Backend Developer", "sehir": "İstanbul",
         "yetenekler": ["seo", "reklam", "analiz", "pazarlama", "python"], "firma": "Arman Yazılım",
         "tuyp": "🎯 Şirket Kültürü: Mülakatta geçmişte yazdığın backend algoritmalarından bahset.",
-        "link": "https://kariyer.net" 
+        "link": "https://www.kariyer.net/is-ilanlari/istanbul-yazilim-gelistirme" 
     },
     {
         "unvan": "Sosyal Medya Stajyeri", "sehir": "İzmir",
         "yetenekler": ["tasarim", "instagram", "video", "pazarlama"], "firma": "Yaratıcı Medya Ajansı",
         "tuyp": "🎯 Şirket Kültürü: Instagram'da yaptığın eski tasarımları veya videoları mülakatta mutlaka göster.",
-        "link": "https://kariyer.net"
+        "link": "https://www.kariyer.net/is-ilanlari/izmir-stajyer"
     }
 ]
 
@@ -106,7 +106,7 @@ if yuklenen_dosya is not None:
                             link_kodu = f"""
                                 <a href="{ilan['link']}" target="_blank" style="text-decoration: none;">
                                     <div style="background-color: #1E3A8A; color: white; padding: 10px 12px; text-align: center; border-radius: 6px; font-weight: bold; font-size: 14px; margin-top: 15px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1);">
-                                        🔗 Doğrudan İlana Git
+                                        🔗 İlanları Listele
                                     </div>
                                 </a>
                             """
@@ -126,6 +126,6 @@ st.markdown("<br><br>", unsafe_allow_html=True)
 with st.container():
     st.info("💡 **Yol Gösterici Bilgiler Paneli**")
     with st.expander("❓ Sitedeki İlanlar Güncel mi?"):
-        st.write("Evet! Sistemimizdeki tüm ilanlar Kariyer.net üzerindeki aktif ve başvuruya açık olan gerçek ilan detay sayfalarına bağlanmıştır.")
+        st.write("Evet! Sistemimizdeki bağlantılar Kariyer.net üzerindeki anlık, canlı ve başvuruya açık ilan arama motorlarına bağlanmıştır.")
     with st.expander("❓ Başvuru Mektubunu Nasıl Kullanmalıyım?"):
         st.write("Yapay zekanın sizin için hazırladığı mektubu kopyalayarak şirketlerin İK e-postalarına veya kariyer sitelerindeki 'Ön Yazı' kısmına yapıştırarak fark yaratabilirsiniz.")
