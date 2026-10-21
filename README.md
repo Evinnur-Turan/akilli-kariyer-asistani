@@ -1,0 +1,1 @@
+# akilli-kariyer-asistani
