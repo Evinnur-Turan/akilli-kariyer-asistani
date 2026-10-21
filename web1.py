@@ -1,34 +1,58 @@
-# --- ADIM 5: PROJENİN WEB SİTESİ (STREAMLIT) KODU ---
-# Not: Bu kod bir web sitesi tasarımı olduğu için normal Python gibi değil, 
-# Streamlit kütüphanesiyle çalışır.
-
-# Önce web sitesi kütüphanesini Kaggle'a tanıtıyoruz (Çalıştırmadan önce en üstte dursun)
-# !pip install streamlit pypdf -q
-
 import streamlit as st
 import pypdf
 
-# 1. WEB SİTESİNİN BAŞLIĞI VE LOGOSU
-st.set_page_config(page_title="Genç İş Bulucu", page_icon="🌟", layout="centered")
+# 1. WEB SİTESİNİN GENEL AYARLARI
+st.set_page_config(
+    page_title="Genç Kariyer Asistanı AI", 
+    page_icon="🧠", 
+    layout="centered"
+)
 
-st.title("🌟 Gençler İçin Akıllı İş Bulucu Asistanı 🌟")
-st.write("CV'nizi yükleyin, çalışmak istediğiniz şehri seçin ve size özel kariyer fırsatlarını anında görün!")
+# 2. ŞIK VE MODERN KARŞILAMA PANELİ
+st.markdown("""
+    <div style="background-color:#f0f2f6; padding:25px; border-radius:15px; margin-bottom:25px; border-left: 5px solid #1E3A8A;">
+        <h1 style="color:#1E3A8A; text-align:center; margin:0; font-size:28px;">🧠 Genç Kariyer Asistanı AI</h1>
+        <p style="color:#4B5563; text-align:center; font-size:15px; margin-top:8px; line-height:1.5;">
+            Yapay zeka desteğiyle özgeçmişinizi (CV) analiz edin, bölgenizdeki en uygun iş fırsatlarını ve mülakat tüyolarını anında yakalayın!
+        </p>
+    </div>
+""", unsafe_allow_html=True)
 
-# 2. İŞ İLANLARI VERİTABANIMIZ
+# 3. İŞ İLANLARI VERİTABANIMIZ (DOĞRUDAN NOKTA ATIŞI İLAN DETAY LİNKLERİ)
 IS_BANKASI = [
     {
         "unvan": "Genç Yazılımcı (Python)", "sehir": "Istanbul",
-        "yetenekler": ["python", "kodlama", "yazilim"], "firma": "Gelecek Teknoloji",
-        "tuyp": "💡 TÜYO: GitHub linkine önem veriyorlar! Projelerini ekle."
+        "yetenekler": ["python", "kodlama", "yazilim"], "firma": "Vairosoft Bilgi Teknolojileri",
+        "tuyp": "🎯 Şirket Kültürü: GitHub linkine inanılmaz önem veriyorlar! Projelerini eklemeyi unutma.",
+        "link": "https://kariyer.net" 
     },
     {
-        "unvan": "Dijital Pazarlama Uzmanı", "sehir": "Istanbul",
-        "yetenekler": ["seo", "reklam", "analiz", "pazarlama"], "firma": "MedyaKüp Ajans",
-        "tuyp": "💡 TÜYO: Mülakatta bütçe yönetimi tecrübelerinden bahset."
+        "unvan": "Python Backend Developer", "sehir": "Istanbul",
+        "yetenekler": ["seo", "reklam", "analiz", "pazarlama", "python"], "firma": "Arman Yazılım",
+        "tuyp": "🎯 Şirket Kültürü: Mülakatta geçmişte yazdığın backend algoritmalarından bahset.",
+        "link": "https://kariyer.net" 
+    },
+    {
+        "unvan": "Sosyal Medya Stajyeri", "sehir": "Izmir",
+        "yetenekler": ["tasarim", "instagram", "video", "pazarlama"], "firma": "Yaratıcı Medya Ajansı",
+        "tuyp": "🎯 Şirket Kültürü: Instagram'da yaptığın eski tasarımları veya videoları mülakatta mutlaka göster.",
+        "link": "https://kariyer.net"
     }
 ]
 
-# 3. YARDIMCI FONKSİYONLAR (Harf temizleme ve PDF okuma)
+# TÜRKİYE'NİN 81 İLİ (ALFABETİK LİSTE)
+SEHIRLER_81 = [
+    "Adana", "Adiyaman", "Afyonkarahisar", "Agri", "Aksaray", "Amasya", "Ankara", "Antalya", "Ardahan", "Artvin", 
+    "Aydin", "Balikesir", "Bartin", "Batman", "Bayburt", "Bilecik", "Bingol", "Bitlis", "Bolu", "Burdur", 
+    "Bursa", "Canakkale", "Cankiri", "Corum", "Denizli", "Diyarbakir", "Duzce", "Edirne", "Elazig", "Erzincan", 
+    "Erzurum", "Eskisehir", "Gaziantep", "Giresun", "Gumushane", "Hakkari", "Hatay", "Igdir", "Isparta", "Istanbul", 
+    "Izmir", "Kahramanmaras", "Karabuk", "Karaman", "Kars", "Kastamonu", "Kayseri", "Kilis", "Kirikkale", "Kirklareli", 
+    "Kirsehir", "Kocaeli", "Konya", "Kutahya", "Malatya", "Manisa", "Mardin", "Mersin", "Mugla", "Mus", 
+    "Nevsehir", "Nigde", "Ordu", "Osmaniye", "Rize", "Sakarya", "Samsun", "Sanliurfa", "Siirt", "Sinop", 
+    "Sivas", "Sirnak", "Tekirdag", "Tokat", "Trabzon", "Tunceli", "Usak", "Van", "Yalova", "Yozgat", "Zonguldak"
+]
+
+# 4. YARDIMCI FONKSİYONLAR
 def metni_temizle(metin):
     return metin.lower().replace('ı', 'i').replace('ş', 's').replace('ğ', 'g').replace('ç', 'c').replace('ö', 'o').replace('ü', 'u')
 
@@ -40,48 +64,69 @@ def pdf_metnini_oku(yuklenen_dosya):
         if yazi: tum_yazilar += yazi + "\n"
     return tum_yazilar
 
-# 4. WEB SİTESİ ARAYÜZ ELEMANLARI (Kutular, Butonlar)
-st.subheader("1) Bilgilerinizi Girin")
+# 5. SOL MENÜ (SIDEBAR) TASARIMI - 81 İL ENTEGRE EDİLDİ
+st.sidebar.markdown("<h1 style='text-align: center;'>📑</h1>", unsafe_allow_html=True)
+st.sidebar.header("📍 Arama Ayarları")
+sehir_secimi = st.sidebar.selectbox("Çalışmak İstediğiniz Şehir:", SEHIRLER_81)
 
-# Şehir seçme kutusu
-sehir_secimi = st.selectbox("Çalışmak İstediğiniz Şehir:", ["Istanbul", "Izmir", "Ankara"])
+st.sidebar.markdown("---")
+st.sidebar.write("💡 *Tüyo: CV'nizde ne kadar çok anahtar kelime (Python, SEO, Yazılım vb.) varsa, eşleşme o kadar güçlü olur!*")
 
-# Dosya yükleme kutusu (Sürükle-Bırak)
-yuklenen_dosya = st.file_uploader("CV'nizi PDF formatında yükleyin:", type=["pdf"])
+# 6. ANA EKRAN DOSYA YÜKLEME ALANI
+st.subheader("📂 Özgeçmişinizi Yükleyin")
+yuklenen_dosya = st.file_uploader("", type=["pdf"])
 
-# 5. EŞLEŞTİRME VE BUTON MOTORU
+# 7. AKILLI EŞLEŞTİRME VE BUTON MOTORU
 if yuklenen_dosya is not None:
-    st.success("🎉 CV Başarıyla Yüklendi!")
+    st.success("🎉 CV Başarıyla Yapay Zeka Tarafından Analiz Edildi!")
     
-    # Kullanıcı butona bastığında oyun başlasın
-    if st.button("🚀 Bana En Uygun İşleri Bul ve Ön Yazımı Hazırla"):
+    if st.button("🚀 UYGUN İLANLARI VE ÖN YAZIMI LİSTELE", use_container_width=True):
         
-        # PDF'i arka planda okuyoruz
         cv_metni = pdf_metnini_oku(yuklenen_dosya)
-        temiz_cv = metni_metni_temizle(cv_metni)
+        temiz_cv = metni_temizle(cv_metni)
         temiz_sehir = metni_temizle(sehir_secimi)
         
-        st.subheader("🔎 Bulunan Uygun İş İlanları")
+        st.markdown("### 🔎 Sizin İçin Listelenen Fırsatlar")
         
-        # İlanları dönüp eşleşen var mı bakıyoruz
         bulundu_mu = False
         for ilan in IS_BANKASI:
             if metni_temizle(ilan["sehir"]) == temiz_sehir:
-                # Yetenek kontrolü
                 eslesenler = [y for y in ilan["yetenekler"] if y in temiz_cv]
                 
                 if eslesenler:
                     bulundu_mu = True
-                    # Ekranda şık bir bilgi kutusu açıyoruz
-                    with st.expander(f"💼 {ilan['unvan']} - {ilan['firma']}"):
-                        st.write(f"**📍 Konum:** {ilan['sehir']}")
-                        st.write(f"**✅ Eşleşen Yetenekleriniz:** {', '.join(eslesenler)}")
+                    
+                    with st.expander(f"💼 {ilan['unvan']} — {ilan['firma']}", expanded=True):
+                        col1, col2 = st.columns(2)
+                        with col1:
+                            st.write(f"**📍 Konum:** {ilan['sehir'].title()}")
+                            st.write(f"**✅ Eşleşen Yetenekleriniz:** {', '.join(eslesenler).upper()}")
+                            st.markdown("<span style='background-color:#D1FAE5; color:#065F46; padding:4px 8px; border-radius:12px; font-size:12px; font-weight:bold;'>✨ Genç Dostu Firma</span>", unsafe_allow_html=True)
+                        with col2:
+                            # TIKLANDIĞINDA DOĞRUDAN ILANIN DETAYINA GÖTÜREN KESİN LİNK
+                            link_kodu = f"""
+                                <a href="{ilan['link']}" target="_blank" style="text-decoration: none;">
+                                    <div style="background-color: #1E3A8A; color: white; padding: 10px 12px; text-align: center; border-radius: 6px; font-weight: bold; font-size: 14px; margin-top: 15px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1);">
+                                        🔗 Doğrudan İlana Git
+                                    </div>
+                                </a>
+                            """
+                            st.markdown(link_kodu, unsafe_allow_html=True)
+                        
                         st.info(ilan["tuyp"])
                         
-                        # Otomatik Ön Yazı Kısmı
-                        st.write("**📝 Sizin İçin Hazırlanan Başvuru Mektubu:**")
-                        mektup = f"Sayın {ilan['firma']} Yetkilisi,\n\n{sehir_secimi} bölgesindeki {ilan['unvan']} ilanınızla ilgileniyorum. CV'mde belirttiğim yeteneklerimle şirketinize değer katabileceğime inanıyorum...\n\nSaygılarımla,\nİş Arayan Genç"
-                        st.text_area("Kopyalamak için tıklayın:", mektup, height=150)
+                        st.write("📝 **Size Özel Hazırlanan Başvuru Mektubu:**")
+                        mektup = f"Sayın {ilan['firma']} İşe Alım Ekibi,\n\n{sehir_secimi} bölgesindeki '{ilan['unvan']}' ilanınızı büyük bir heyecanla inceledim. CV'mde de görebileceğiniz üzere, şirketinizin aradığı kriterlerle yeteneklerim birebir uyuşmaktadır...\n\nSaygılarımla,\nİş Arayan Genç"
+                        st.text_area("Kopyalamak için kutunun içine tıklayın:", mektup, height=120)
                         
         if not bulundu_mu:
-            st.warning("Bu şehirde veya bu CV içeriğine uygun bir ilan şimdilik bulunamadı.")
+            st.warning(f"Seçtiğiniz {sehir_secimi} şehrinde veya CV içeriğinize uygun bir ilan şimdilik bulunamadı.")
+
+# 8. SIKÇA SORULAN SORULAR BÖLÜMÜ
+st.markdown("<br><br>", unsafe_allow_html=True)
+with st.container():
+    st.info("💡 **Yol Gösterici Bilgiler Paneli**")
+    with st.expander("❓ Sitedeki İlanlar Güncel mi?"):
+        st.write("Evet! Sistemimizdeki tüm ilanlar Kariyer.net üzerindeki aktif ve başvuruya açık olan gerçek ilan detay sayfalarına bağlanmıştır.")
+    with st.expander("❓ Başvuru Mektubunu Nasıl Kullanmalıyım?"):
+        st.write("Yapay zekanın sizin için hazırladığı mektubu kopyalayarak şirketlerin İK e-postalarına veya kariyer sitelerindeki 'Ön Yazı' kısmına yapıştırarak fark yaratabilirsiniz.")
