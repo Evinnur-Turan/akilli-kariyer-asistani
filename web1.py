@@ -8,6 +8,10 @@ st.set_page_config(
     layout="centered"
 )
 
+# HAFIZA (SESSION STATE) TANIMLAMALARI
+if "arama_yapildi" not in st.session_state:
+    st.session_state.arama_yapildi = False
+
 # 2. ŞIK VE MODERN KARŞILAMA PANELİ
 st.markdown("""
     <div style="background-color:#f0f2f6; padding:25px; border-radius:15px; margin-bottom:25px; border-left: 5px solid #1E3A8A;">
@@ -18,7 +22,7 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
-# 3. İŞ İLANLARI VERİTABANIMIZ (ASLA KAPANMAYACAK CANLI LİNKLER)
+# 3. İŞ İLANLARI VERİTABANIMIZ
 IS_BANKASI = [
     {
         "unvan": "Genç Yazılımcı (Python)", "sehir": "İstanbul",
@@ -40,7 +44,7 @@ IS_BANKASI = [
     }
 ]
 
-# TÜRKİYE'NİN 81 İLİ (TAMAMEN TÜRKÇE VE ALFABETİK LİSTE)
+# TÜRKİYE'NİN 81 İLİ
 SEHIRLER_81 = [
     "Adana", "Adıyaman", "Afyonkarahisar", "Ağrı", "Aksaray", "Amasya", "Ankara", "Antalya", "Ardahan", "Artvin", 
     "Aydın", "Balıkesir", "Bartın", "Batman", "Bayburt", "Bilecik", "Bingöl", "Bitlis", "Bolu", "Burdur", 
@@ -76,12 +80,20 @@ st.sidebar.write("💡 *Tüyo: CV'nizde ne kadar çok anahtar kelime (Python, SE
 st.subheader("📂 Özgeçmişinizi Yükleyin")
 yuklenen_dosya = st.file_uploader("", type=["pdf"])
 
-# 7. AKILLI EŞLEŞTİRME VE BUTON MOTORU
+# Dosya değişirse veya kaldırılırsa aramayı sıfırla
+if yuklenen_dosya is None:
+    st.session_state.arama_yapildi = False
+
+# 7. AKILLI EŞLEŞTİRME MOTORU
 if yuklenen_dosya is not None:
-    st.success("🎉 CV Başarıyla Yapay Zeka Tarafından Analiz Edildi!")
+    st.success("🎉 CV Başarıyla Sisteme Yüklendi!")
     
+    # Arama butonu hafızayı tetikler
     if st.button("🚀 UYGUN İLANLARI VE ÖN YAZIMI LİSTELE", use_container_width=True):
-        
+        st.session_state.arama_yapildi = True
+
+    # Eğer butona basıldıysa veya hafızada arama yapıldı görünüyorsa sonuçları göster
+    if st.session_state.arama_yapildi:
         cv_metni = pdf_metnini_oku(yuklenen_dosya)
         temiz_cv = metni_temizle(cv_metni)
         temiz_sehir = metni_temizle(sehir_secimi)
@@ -116,7 +128,9 @@ if yuklenen_dosya is not None:
                         
                         st.write("📝 **Size Özel Hazırlanan Başvuru Mektubu:**")
                         mektup = f"Sayın {ilan['firma']} İşe Alım Ekibi,\n\n{sehir_secimi} bölgesindeki '{ilan['unvan']}' ilanınızı büyük bir heyecanla inceledim. CV'mde de görebileceğiniz üzere, şirketinizin aradığı kriterlerle yeteneklerim birebir uyuşmaktadır...\n\nSaygılarımla,\nİş Arayan Genç"
-                        st.text_area("Kopyalamak için kutunun içine tıklayın:", mektup, height=120)
+                        
+                        # Benzersiz key ekleyerek çakışmaları önlüyoruz
+                        st.text_area("Kopyalamak için kutunun içine tıklayın:", mektup, height=120, key=f"mektup_{ilan['unvan']}")
                         
         if not bulundu_mu:
             st.warning(f"Seçtiğiniz {sehir_secimi} şehrinde veya CV içeriğinize uygun bir ilan şimdilik bulunamadı.")
