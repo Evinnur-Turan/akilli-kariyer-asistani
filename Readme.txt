@@ -1,57 +1,83 @@
-# 🌟 Yapay Zeka Destekli Akıllı Kariyer Asistanı 🌟
+# 🎯 Kariyer & Gelişim Yol Gösterici Asistanı
 
-Bu proje, **Yapay Zeka Destekli Kodlama** vizyonuyla; iş arama sürecinin başındaki gençler ve yeni mezunlar için geliştirilmiş akıllı bir kariyer yol arkadaşıdır. Geleneksel iş arama sitelerinin karmaşıklığını, kural tabanlı doğal dil işleme ve akıllı metin analizi algoritmalarıyla çözerek kullanıcı odaklı, sade ve rehberlik içeren bir deneyim sunar.
+<!-- Proje Rozetleri -->
+![Python](https://shields.io)
+![Streamlit](https://shields.io)
+![UI/UX](https://shields.io)
+![License](https://shields.io)
 
----
-
-### 🎓 Geliştirici Bilgisi
-*   **Geliştirici:** [Senin Adın Soyadın]
-*   **Bölüm:** Yapay Zeka Destekli Kodlama (1. Sınıf Öğrencisi)
-*   **Proje Amacı:** Henüz resmi dersler başlamadan, yapay zeka ve web entegrasyonu mantığını pratiğe dökmek amacıyla geliştirilmiş erken aşama portfolyo çalışmasıdır.
-
----
-
-### 🚀 Öne Çıkan Yapay Zeka & Otomasyon Özellikleri
-
-*   **📂 NLP Temelli CV Çıkarımı:** Yüklenen PDF özgeçmiş metinlerini normalize eder (küçük harf dönüşümü, Türkçe karakter standardizasyonu) ve adayın yetkinlik havuzunu cımbızla çeker gibi analiz eder.
-*   **📍 Bölgesel Eşleştirme Motoru:** Adayın yaşamak/çalışmak istediği hedef lokasyon ile yetenek setini iş ilanları veritabanıyla akıllıca eşleştirir.
-*   **📚 Akıllı Eksik Analizi (Gap Analysis):** Adayın mevcut yetenekleri ile ilanın gereksinimleri arasındaki farkı hesaplar ve adaya doğrudan ücretsiz gelişim köprüleri (kurs/eğitim linkleri) önerir.
-*   **📝 Üretken Ön Yazı (Cover Letter) Motoru:** Analiz edilen CV verilerini ve hedef şirket profilini harmanlayarak kişiselleştirilmiş, profesyonel bir başvuru mektubu yazar.
+Kariyer hedeflerinize ulaşmanız için tasarlanmış modern, yapay zeka odaklı mimariye hazır bir **gelişim ve yol haritası simülatörüdür**. Kullanıcılardan aldığı mevcut profil verilerini işleyerek, onlara göz yormayan premium bir arayüz eşliğinde stratejik aksiyon adımları sunar.
 
 ---
 
-### 🛠️ Teknolojik Altyapı
-
-*   **Dil:** Python
-*   **Arayüz & Canlı Yayın (Deployment):** Streamlit 
-*   **Doküman Analitiği:** PyPDF / Python-DocX
+## 📸 Ekran Görüntüsü
+> _Uygulamanın arayüz görselini buraya ekleyebilirsiniz._
+<p align="center">
+  <img src="https://unsplash.com" alt="Kariyer Asistanı Arayüzü" width="100%">
+</p>
 
 ---
 
-### 💻 Yerel Bilgisayarda (Local) Çalıştırma Adımları
+## 🌟 Öne Çıkan Özellikler
 
-Yarın web arayüzünü açtığımızda kendi bilgisayarınızda denemek için şu 3 adımı takip edebilirsiniz:
+### 🎨 Premium UI/UX Mimarisi
+* **Mat ve Modern Tema:** Göz yormayan gri-mavi tonlar (`#f4f6f8`, `#2c3e50`) ile profesyonel bir deneyim.
+* **Özel CSS Enjeksiyonu:** Standart Streamlit tasarımının dışına çıkan, gölgelendirilmiş yumuşak kart yapısı (`box-shadow`).
 
-1️⃣ **Gerekli Kütüphaneleri Yükleyin:**
+### 📊 Akıllı Profilleme
+* **Dinamik Girdi Setleri:** Deneyim süresi, mevcut unvan ve hedef yetkinlikleri analiz eden form yapısı.
+* **Aksiyon Odaklı Çıktılar:** "İlk Adımlar" ve "Stratejik Plan" başlıkları altında organize edilmiş, okunabilirliği yüksek çıktılar.
+
+---
+
+## 🚀 Hızlı Başlangıç
+
+Aşağıdaki adımları takip ederek projeyi bilgisayarınızda bir dakikadan kısa sürede çalıştırabilirsiniz.
+
+### 1️⃣ Gereksinimler
+Sisteminizde Python 3.9 veya üzeri bir sürümün kurulu olduğundan emin olun.
+
+### 2️⃣ Kurulum
+Depoyu yerel bilgisayarınıza klonlayın ve ilgili dizine geçiş yapın:
 ```bash
-pip install streamlit pypdf python-docx
+git clone https://github.com
+cd kariyer-asistani
 ```
 
-2️⃣ **Kodu Kaydedin:**
-Kodları bilgisayarınızda `app.py` adında bir dosyaya yapıştırıp kaydedin.
+Gerekli olan tek kütüphaneyi yükleyin:
+```bash
+pip install streamlit
+```
 
-3️⃣ **Uygulamayı Başlatın:**
-Terminal veya komut satırına şu komutu yazarak tarayıcınızda canlı halini açın:
+### 3️⃣ Çalıştırma
+Uygulamayı yerel sunucuda başlatmak için terminale şu komutu yazın:
 ```bash
 streamlit run app.py
 ```
+Uygulama otomatik olarak tarayıcınızda `http://localhost:8501` adresinde açılacaktır.
 
 ---
 
-### 🔮 Gelecek Yol Haritası
-*   [ ] Temel metin eşleştirme motorunu **Gelişmiş Büyük Dil Modelleri (LLM - OpenAI/Gemini API)** ile entegre ederek anlamsal (semantic) CV analizine geçmek.
-*   [ ] Web Scraping (BeautifulSoup/Scrapy) ile büyük kariyer sitelerinden anlık veri beslemesi sağlamak.
-*   [ ] Bölgesel maaş ve ev kirası dengesini analiz eden bir "Geçim Tahmin Motoru" kurmak.
+## 🛠️ Proje Yapısı
+
+```text
+kariyer-asistani/
+│
+├── app.py                 # Ana Streamlit uygulama kodu ve CSS tasarımları
+├── README.md              # Proje dokümantasyonu (Şu an okuduğunuz dosya)
+└── requirements.txt       # Gerekli bağımlılıklar listesi
+```
 
 ---
-✨ *Bu proje, bir Yapay Zeka Destekli Kodlama öğrencisinin dersler başlamadan önce attığı ilk cesur ve yenilikçi adımdır.* ✨
+
+## 🗺️ Yol Haritası (Roadmap)
+
+- [ ] **AI Entegrasyonu:** Tavsiyelerin OpenAI GPT veya Google Gemini API ile tamamen dinamik üretilmesi.
+- [ ] **İlerleme Takibi:** Kullanıcılar için interaktif bir görev listesi (To-Do List) ve ilerleme çubuğu.
+- [ ] **Raporlama:** Gelişim planının tek tıkla **PDF** olarak indirilebilmesi.
+
+---
+
+## 📄 Lisans
+
+Bu proje **MIT Lisansı** ile lisanslanmıştır. Daha fazla bilgi için `LICENSE` dosyasına göz atabilirsiniz.
